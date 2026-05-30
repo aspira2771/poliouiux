@@ -1,7 +1,8 @@
 import { motion } from 'framer-motion'
 import { useEffect } from 'react'
-import Ant from './Ant.jsx'
 import './PortfolioDetail.css'
+
+const BASE = import.meta.env.BASE_URL
 
 const PALETTE = [
   { name: 'Sky', hex: '#7FB9E6' },
@@ -71,12 +72,14 @@ export default function PortfolioDetail({ project, onBack }) {
         animate={{ y: 0, opacity: 1 }}
         transition={{ type: 'spring', stiffness: 240, damping: 14, delay: 0.25 }}
       >
-        <motion.div
-          animate={{ y: [0, -10, 0], rotate: [-3, 3, -3] }}
+        <motion.img
+          className="detail-ant-img"
+          src={`${BASE}assets/ant.png`}
+          alt=""
+          draggable="false"
+          animate={{ y: [0, -10, 0], rotate: [-4, 4, -4] }}
           transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
-        >
-          <Ant size={86} walking={false} waving />
-        </motion.div>
+        />
       </motion.div>
     </motion.div>
   )

@@ -1,9 +1,10 @@
 import { useMemo } from 'react'
 import { motion } from 'framer-motion'
-import Ant from './Ant.jsx'
 import BrainOrb from './BrainOrb.jsx'
 import { projects } from '../data/projects.js'
 import './AntBrain.css'
+
+const BASE = import.meta.env.BASE_URL
 
 // Lay the 6 orbs out on an arc that hovers above the ant's head, like a thought cloud.
 function useOrbLayout() {
@@ -72,7 +73,14 @@ export default function AntBrain({ onClose, onOpenProject }) {
           >
             Hi!
           </motion.div>
-          <Ant size={120} walking={false} waving />
+          <motion.img
+            className="brain-ant-img"
+            src={`${BASE}assets/ant.png`}
+            alt=""
+            draggable="false"
+            animate={{ rotate: [-2, 2, -2] }}
+            transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
+          />
         </motion.div>
       </div>
 

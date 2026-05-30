@@ -5,7 +5,7 @@ import './Hero.css'
 
 const BASE = import.meta.env.BASE_URL
 
-// Each letter of the balloon title gets a palette color, cycling through the 6 hues.
+// Each letter of the balloon title gets a palette color (CSS fallback only).
 const PALETTE = ['var(--tangerine)', 'var(--butter)', 'var(--sky)', 'var(--matcha)', 'var(--pink)', 'var(--lavender)']
 
 function BalloonWord({ word, startIndex }) {
@@ -18,14 +18,9 @@ function BalloonWord({ word, startIndex }) {
           style={{ color: PALETTE[(startIndex + i) % PALETTE.length] }}
           initial={{ y: 28, opacity: 0, scale: 0.6 }}
           animate={{ y: 0, opacity: 1, scale: 1 }}
-          transition={{
-            delay: 0.15 * (startIndex + i),
-            type: 'spring',
-            stiffness: 260,
-            damping: 14,
-          }}
+          transition={{ delay: 0.15 * (startIndex + i), type: 'spring', stiffness: 260, damping: 14 }}
         >
-          {ch === ' ' ? ' ' : ch}
+          {ch === ' ' ? ' ' : ch}
         </motion.span>
       ))}
     </span>
@@ -33,26 +28,36 @@ function BalloonWord({ word, startIndex }) {
 }
 
 export default function Hero({ onScrollCue }) {
-  const [imgOk, setImgOk] = useState(true)
+  const [bgOk, setBgOk] = useState(true)
+  const [titleOk, setTitleOk] = useState(true)
 
   return (
     <section className="hero">
       <div className="hero-bg" aria-hidden="true">
-        {imgOk ? (
-          <img
-            className="hero-bg-img"
-            src={`${BASE}assets/hero-tree.jpg`}
-            alt=""
-            onError={() => setImgOk(false)}
-          />
+        {bgOk ? (
+          <img className="hero-bg-img" src={`${BASE}assets/tree.jpg`} alt="" onError={() => setBgOk(false)} />
         ) : (
           <ForestScene variant="hero" />
         )}
       </div>
 
       <div className="hero-title">
-        <BalloonWord word="JiHyun's" startIndex={0} />
-        <BalloonWord word="Life" startIndex={8} />
+        {titleOk ? (
+          <motion.img
+            className="hero-title-img"
+            src={`${BASE}assets/title.png`}
+            alt="JiHyun's Life"
+            onError={() => setTitleOk(false)}
+            initial={{ scale: 0.7, opacity: 0, y: 20 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            transition={{ type: 'spring', stiffness: 200, damping: 16 }}
+          />
+        ) : (
+          <>
+            <BalloonWord word="JiHyun's" startIndex={0} />
+            <BalloonWord word="Life" startIndex={8} />
+          </>
+        )}
       </div>
 
       <motion.button
@@ -60,7 +65,7 @@ export default function Hero({ onScrollCue }) {
         onClick={onScrollCue}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{ opacity: { delay: 2 }, y: { delay: 2, duration: 1.6, repeat: Infinity } }}
+        transition={{ opacity: { delay: 1.6 }, y: { delay: 1.6, duration: 1.6, repeat: Infinity } }}
         aria-label="Scroll down to meet the ants"
       >
         meet the ants ↓

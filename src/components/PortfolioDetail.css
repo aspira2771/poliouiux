@@ -105,6 +105,12 @@
   z-index: 2;
 }
 
+.detail-ant-img {
+  height: clamp(96px, 18vw, 150px);
+  width: auto;
+  filter: drop-shadow(0 10px 12px rgba(0, 0, 0, 0.35));
+}
+
 @media (max-width: 640px) {
   .detail-card {
     flex-direction: column;

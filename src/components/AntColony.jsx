@@ -1,6 +1,5 @@
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import Ant from './Ant.jsx'
 import ForestScene from './ForestScene.jsx'
 import './AntColony.css'
 
@@ -36,7 +35,7 @@ export default function AntColony({ onSelectAnt, dimmed }) {
         {imgOk ? (
           <img
             className="colony-bg-img"
-            src={`${BASE}assets/tree-base.jpg`}
+            src={`${BASE}assets/tree.jpg`}
             alt=""
             onError={() => setImgOk(false)}
           />
@@ -82,8 +81,14 @@ export default function AntColony({ onSelectAnt, dimmed }) {
             onClick={handlePick}
             aria-label="Open this ant's portfolio"
           >
-            <motion.span className="ant-walker-inner" whileHover={{ scale: 1.25 }} whileTap={{ scale: 0.9 }}>
-              <Ant size={58} walking={!dimmed} />
+            <motion.span
+              className="ant-walker-inner"
+              whileHover={{ scale: 1.3 }}
+              whileTap={{ scale: 0.9 }}
+              animate={dimmed ? { y: 0 } : { y: [0, -5, 0] }}
+              transition={{ duration: 0.55, repeat: dimmed ? 0 : Infinity, ease: 'easeInOut', delay: (ant.id % 4) * 0.12 }}
+            >
+              <img className="ant-img" src={`${BASE}assets/ant.png`} alt="" draggable="false" />
             </motion.span>
           </button>
         ))}

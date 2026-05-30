@@ -19,9 +19,10 @@ npm run preview  # preview the production build
 
 ## Make it yours
 
-- **Background images** — drop `hero-tree.jpg` and `tree-base.jpg` into
-  [`public/assets/`](public/assets/README.md). Missing images fall back to a
-  green gradient, so the site always works.
+- **Images** — the real artwork (tree photo, plush title, 3D ant) lives in
+  [`public/assets/`](public/assets/README.md). Replace any file with the same
+  name to swap it. Missing files fall back to a hand-drawn SVG scene, so the
+  site always works.
 - **Projects** — edit [`src/data/projects.js`](src/data/projects.js). There are
   6 sample projects, one per palette color. Change the title, tagline,
   description, role, year, and color.
