@@ -1,0 +1,67 @@
+import { motion } from 'framer-motion'
+import { useState } from 'react'
+import './Hero.css'
+
+const BASE = import.meta.env.BASE_URL
+
+// Each letter of the balloon title gets a palette color, cycling through the 6 hues.
+const PALETTE = ['var(--tangerine)', 'var(--butter)', 'var(--sky)', 'var(--matcha)', 'var(--pink)', 'var(--lavender)']
+
+function BalloonWord({ word, startIndex }) {
+  return (
+    <span className="balloon-word">
+      {word.split('').map((ch, i) => (
+        <motion.span
+          key={i}
+          className="balloon-letter"
+          style={{ color: PALETTE[(startIndex + i) % PALETTE.length] }}
+          initial={{ y: 28, opacity: 0, scale: 0.6 }}
+          animate={{ y: 0, opacity: 1, scale: 1 }}
+          transition={{
+            delay: 0.15 * (startIndex + i),
+            type: 'spring',
+            stiffness: 260,
+            damping: 14,
+          }}
+        >
+          {ch === ' ' ? ' ' : ch}
+        </motion.span>
+      ))}
+    </span>
+  )
+}
+
+export default function Hero({ onScrollCue }) {
+  const [imgOk, setImgOk] = useState(true)
+
+  return (
+    <section className="hero">
+      <div className="hero-bg forest-fallback" aria-hidden="true">
+        {imgOk && (
+          <img
+            className="hero-bg-img"
+            src={`${BASE}assets/hero-tree.jpg`}
+            alt=""
+            onError={() => setImgOk(false)}
+          />
+        )}
+      </div>
+
+      <div className="hero-title">
+        <BalloonWord word="JiHyun's" startIndex={0} />
+        <BalloonWord word="Life" startIndex={8} />
+      </div>
+
+      <motion.button
+        className="hero-scroll hand"
+        onClick={onScrollCue}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1, y: [0, 8, 0] }}
+        transition={{ opacity: { delay: 2 }, y: { delay: 2, duration: 1.6, repeat: Infinity } }}
+        aria-label="Scroll down to meet the ants"
+      >
+        meet the ants ↓
+      </motion.button>
+    </section>
+  )
+}

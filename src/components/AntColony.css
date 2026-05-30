@@ -1,0 +1,102 @@
+.colony {
+  position: relative;
+  height: 100svh;
+  min-height: 520px;
+  overflow: hidden;
+}
+
+.colony-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.colony-bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.colony-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(20, 30, 18, 0);
+  transition: background 0.5s ease;
+  pointer-events: none;
+}
+.colony-scrim.is-dim {
+  background: rgba(20, 30, 18, 0.55);
+}
+
+.colony-hint {
+  position: absolute;
+  z-index: 3;
+  top: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #fff;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+  text-align: center;
+  pointer-events: none;
+}
+
+.colony-hint-arrow {
+  display: block;
+  margin: 0.2rem auto 0;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.colony-track {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+}
+
+/* The walking line travels fully across the viewport and wraps seamlessly. */
+@keyframes walk-across {
+  from {
+    transform: translateX(-12vw);
+  }
+  to {
+    transform: translateX(112vw);
+  }
+}
+
+.ant-walker {
+  position: absolute;
+  left: 0;
+  bottom: 6px;
+  padding: 6px;
+  animation-name: walk-across;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  will-change: transform;
+}
+
+.colony-track.is-paused .ant-walker {
+  animation-play-state: paused;
+}
+
+.ant-walker-inner {
+  display: block;
+  transform-origin: bottom center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ant-walker {
+    animation: none;
+  }
+  /* Spread the ants out statically when motion is reduced */
+  .ant-walker:nth-child(1) { transform: translateX(4vw); }
+  .ant-walker:nth-child(2) { transform: translateX(14vw); }
+  .ant-walker:nth-child(3) { transform: translateX(24vw); }
+  .ant-walker:nth-child(4) { transform: translateX(34vw); }
+  .ant-walker:nth-child(5) { transform: translateX(44vw); }
+  .ant-walker:nth-child(6) { transform: translateX(54vw); }
+  .ant-walker:nth-child(7) { transform: translateX(64vw); }
+  .ant-walker:nth-child(8) { transform: translateX(74vw); }
+  .ant-walker:nth-child(9) { transform: translateX(84vw); }
+  .ant-walker:nth-child(10) { transform: translateX(94vw); }
+}
