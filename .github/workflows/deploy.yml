@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - claude/portfolio-interactive-ants-7gbIH
   workflow_dispatch:
 
 permissions:
