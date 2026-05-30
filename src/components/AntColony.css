@@ -7,7 +7,7 @@
 
 .colony-bg {
   position: absolute;
-  inset: 0;
+  inset: -2%;
   z-index: 0;
 }
 
@@ -69,7 +69,8 @@
   position: absolute;
   left: 0;
   bottom: 6px;
-  padding: 6px;
+  /* generous tap target around the moving ant so it's easy to catch */
+  padding: 16px 22px;
   animation-name: walk-across;
   animation-timing-function: linear;
   animation-iteration-count: infinite;

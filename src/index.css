@@ -40,6 +40,13 @@ body {
   min-height: 100%;
 }
 
+/* Single-screen experience — no page scrolling */
+.stage {
+  position: relative;
+  height: 100svh;
+  overflow: hidden;
+}
+
 img {
   display: block;
   max-width: 100%;
