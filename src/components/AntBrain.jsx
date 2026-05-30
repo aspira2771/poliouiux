@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useMemo, useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import BrainOrb from './BrainOrb.jsx'
 import { projects } from '../data/projects.js'
@@ -29,6 +29,17 @@ function useOrbLayout() {
 
 export default function AntBrain({ onClose, onOpenProject }) {
   const layout = useOrbLayout()
+  // Ignore close taps for a moment after opening, so the "ghost click" that
+  // mobile browsers fire ~300ms after the opening tap doesn't instantly close us.
+  const [armed, setArmed] = useState(false)
+  useEffect(() => {
+    const t = setTimeout(() => setArmed(true), 450)
+    return () => clearTimeout(t)
+  }, [])
+
+  function handleBackdrop() {
+    if (armed) onClose()
+  }
 
   return (
     <motion.div
@@ -39,7 +50,7 @@ export default function AntBrain({ onClose, onOpenProject }) {
       transition={{ duration: 0.3 }}
     >
       {/* Click the empty space to send the ant back into the line */}
-      <button className="brain-backdrop" onClick={onClose} aria-label="Back to the ants" />
+      <button className="brain-backdrop" onClick={handleBackdrop} aria-label="Back to the ants" />
 
       <div className="brain-stage">
         {/* Faint thought tether dots from the ant up into the cloud */}
