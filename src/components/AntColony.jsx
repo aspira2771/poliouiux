@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Ant from './Ant.jsx'
+import ForestScene from './ForestScene.jsx'
 import './AntColony.css'
 
 const BASE = import.meta.env.BASE_URL
@@ -31,14 +32,16 @@ export default function AntColony({ onSelectAnt, dimmed }) {
 
   return (
     <section className="colony" id="colony">
-      <div className="colony-bg forest-fallback" aria-hidden="true">
-        {imgOk && (
+      <div className="colony-bg" aria-hidden="true">
+        {imgOk ? (
           <img
             className="colony-bg-img"
             src={`${BASE}assets/tree-base.jpg`}
             alt=""
             onError={() => setImgOk(false)}
           />
+        ) : (
+          <ForestScene variant="base" />
         )}
       </div>
 

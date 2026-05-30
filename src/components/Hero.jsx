@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
+import ForestScene from './ForestScene.jsx'
 import './Hero.css'
 
 const BASE = import.meta.env.BASE_URL
@@ -36,14 +37,16 @@ export default function Hero({ onScrollCue }) {
 
   return (
     <section className="hero">
-      <div className="hero-bg forest-fallback" aria-hidden="true">
-        {imgOk && (
+      <div className="hero-bg" aria-hidden="true">
+        {imgOk ? (
           <img
             className="hero-bg-img"
             src={`${BASE}assets/hero-tree.jpg`}
             alt=""
             onError={() => setImgOk(false)}
           />
+        ) : (
+          <ForestScene variant="hero" />
         )}
       </div>
 

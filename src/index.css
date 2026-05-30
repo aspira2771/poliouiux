@@ -57,6 +57,14 @@ button {
   font-family: var(--font-hand);
 }
 
+/* Hand-drawn SVG forest backdrop fills its container */
+.forest-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
 /* A soft fullscreen forest gradient used as fallback when no image asset exists */
 .forest-fallback {
   background:
