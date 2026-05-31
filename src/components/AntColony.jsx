@@ -42,7 +42,7 @@ export default function AntColony({ started, onSelectAnt, dimmed }) {
       >
         {imgOk ? (
           <img
-            className="colony-bg-img"
+            className={`colony-bg-img${started ? ' is-diving' : ''}`}
             src={`${BASE}assets/tree.jpg`}
             alt=""
             onError={() => setImgOk(false)}
