@@ -35,9 +35,9 @@ export default function Hero({ onStart }) {
     <motion.section
       className="hero"
       initial={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 2.4, pointerEvents: 'none' }}
-      transition={{ duration: 0.7, ease: [0.6, 0, 0.4, 1] }}
-      style={{ transformOrigin: '50% 78%' }}
+      exit={{ opacity: 0, scale: 3.2, pointerEvents: 'none' }}
+      transition={{ duration: 0.8, ease: [0.6, 0, 0.4, 1] }}
+      style={{ transformOrigin: '50% 86%' }}
     >
       {/* The whole tree scene sways gently, like a living 3D tree in the wind */}
       <motion.div
